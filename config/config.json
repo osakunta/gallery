@@ -1,0 +1,188 @@
+{
+    "Client": {
+        "applicationTitle": "Satakuntalainen Osakunta",
+        "appVersion": "",
+        "buildCommitHash": "",
+        "buildTime": "",
+        "upTime": "",
+        "Media": {
+            "Video": {
+                "enabled": true
+            },
+            "Photo": {
+                "Converting": {
+                    "enabled": true
+                }
+            },
+            "Thumbnail": {
+                "concurrentThumbnailGenerations": 1,
+                "thumbnailSizes": [
+                    240,
+                    480
+                ],
+                "iconSize": 45,
+                "personThumbnailSize": 200
+            }
+        },
+        "Search": {
+            "enabled": true,
+            "instantSearchEnabled": true,
+            "InstantSearchTimeout": 3000,
+            "searchCacheTimeout": 3600000,
+            "instantSearchCacheTimeout": 3600000,
+            "AutoComplete": {
+                "enabled": true,
+                "cacheTimeout": 3600000,
+                "maxItemsPerCategory": 5
+            }
+        },
+        "Sharing": {
+            "enabled": false,
+            "passwordProtected": false
+        },
+        "Map": {
+            "enabled": true,
+            "useImageMarkers": true,
+            "mapProvider": 0,
+            "mapboxAccessToken": "",
+            "customLayers": [
+                {
+                    "name": "street",
+                    "url": ""
+                }
+            ]
+        },
+        "RandomPhoto": {
+            "enabled": false
+        },
+        "MetaFile": {
+            "enabled": false
+        },
+        "Other": {
+            "captionFirstNaming": false,
+            "enableCache": true,
+            "enableOnScrollRendering": true,
+            "enableOnScrollThumbnailPrioritising": true,
+            "defaultPhotoSortingMethod": 3,
+            "NavBar": {
+                "showItemCount": true
+            }
+        },
+        "Faces": {
+            "enabled": false,
+            "keywordsToPersons": true,
+            "writeAccessMinRole": 4
+        },
+        "authenticationRequired": false,
+        "unAuthenticatedUserRole": 2,
+        "publicUrl": "",
+        "urlBase": "",
+        "languages": ["en"]
+    },
+    "Server": {
+        "port": 80,
+        "host": "0.0.0.0",
+        "Media": {
+            "folder": "/app/data/images",
+            "tempFolder": "/app/data/tmp",
+            "photoProcessingLibrary": 3,
+            "Thumbnail": {
+                "qualityPriority": true,
+                "personFaceMargin": 0.6
+            },
+            "Photo": {
+                "Converting": {
+                    "onTheFly": true,
+                    "resolution": 1080
+                }
+            },
+            "Video": {
+                "transcoding": {
+                    "bitRate": 5242880,
+                    "codec": "libx264",
+                    "format": "mp4",
+                    "fps": 25,
+                    "resolution": 720
+                }
+            }
+        },
+        "Log": {
+            "level": 3,
+            "sqlLevel": 2
+        },
+        "sessionTimeout": 604800000,
+        "photoMetadataSize": 524288,
+        "Database": {
+            "type": 3,
+            "dbFolder": "/app/data/db",
+            "mysql": {
+                "host": "",
+                "username": "",
+                "password": "",
+                "database": ""
+            }
+        },
+        "Sharing": {
+            "updateTimeout": 300000
+        },
+        "Threading": {
+            "enabled": true,
+            "thumbnailThreads": 0
+        },
+        "Indexing": {
+            "folderPreviewSize": 2,
+            "cachedFolderTimeout": 3600000,
+            "reIndexingSensitivity": 1,
+            "excludeFolderList": [],
+            "excludeFileList": []
+        },
+        "Duplicates": {
+            "listingLimit": 1000
+        },
+        "Jobs": {
+            "maxSavedProgress": 10,
+            "scheduled": [
+                {
+                    "name": "Indexing",
+                    "jobName": "Indexing",
+                    "config": {},
+                    "trigger": {
+                        "type": 1
+                    }
+                },
+                {
+                    "name": "Thumbnail Generation",
+                    "jobName": "Thumbnail Generation",
+                    "config": {
+                        "sizes": [
+                            240
+                        ]
+                    },
+                    "trigger": {
+                        "type": 4,
+                        "afterScheduleName": "Indexing"
+                    }
+                },
+                {
+                    "name": "Video Converting",
+                    "jobName": "Video Converting",
+                    "config": {},
+                    "trigger": {
+                        "type": 4,
+                        "afterScheduleName": "Thumbnail Generation"
+                    }
+                },
+                {
+                    "name": "Temp Folder Cleaning",
+                    "jobName": "Temp Folder Cleaning",
+                    "config": {},
+                    "trigger": {
+                        "type": 4,
+                        "afterScheduleName": "Video Converting"
+                    }
+                }
+            ]
+        }
+    },
+    "__NOTE": "NOTE: this config is not intended for manual edit, use the app UI instead as it has comments and descriptions."
+}

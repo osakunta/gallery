@@ -1,3 +1,5 @@
+db/
 images/
+tmp/
 
 .envrc
